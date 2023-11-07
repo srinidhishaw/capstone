@@ -1,0 +1,23 @@
+.custom-select-wrapper {
+    position: relative;
+    width: 200px; /* Set the width according to your design */
+  }
+  
+  .custom-select {
+    appearance: none;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .custom-select:focus {
+    outline: none;
+  }
+  
+  .custom-select option {
+    font-size: 16px;
+  }
