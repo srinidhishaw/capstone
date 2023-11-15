@@ -1,22 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const MyForm = () => {
+  const [difficulties,setDiff] = useState([])
+  const [conditions,setCon] = useState([])
+  const [medications,setMed] = useState([])
   const [formData, setFormData] = useState({
-    options: [],
+    difficulty: [],
+    condition:[],
+    medication:[]
   });
 
   const handleCheckboxChange = (e) => {
     const { value } = e.target;
     setFormData((prevFormData) => {
-      if (prevFormData.options.includes(value)) {
+      if (prevFormData.condition.includes(value)) {
         return {
           ...prevFormData,
-          options: prevFormData.options.filter((option) => option !== value),
+          condition: prevFormData.condition.filter((option) => option !== value),
         };
       } else {
         return {
           ...prevFormData,
-          options: [...prevFormData.options, value],
+          condition: [...prevFormData.condition, value],
+        };
+      }
+    });
+    
+  };
+
+  const handleDifCheckboxChange = (e) => {
+    const { value } = e.target;
+    setFormData((prevFormData) => {
+      if (prevFormData.difficulty.includes(value)) {
+        return {
+          ...prevFormData,
+          difficulty: prevFormData.difficulty.filter((option) => option !== value),
+        };
+      } else {
+        return {
+          ...prevFormData,
+          difficulty: [...prevFormData.difficulty, value],
         };
       }
     });
@@ -29,32 +52,160 @@ const MyForm = () => {
       medication: value,
     }));
   };
+  // const handleDifSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const data = new FormData();
+  //   let difArr = []
+  //   let conArr = []
+  //   let medArr = []
+  //   console.log(formData.options)
+  //   formData.options.forEach((option) => {
+  //     data.append('difficulties', option);
+  //     difArr.push(option)
+  //   });
+  //   setDiff(difArr)
+  //   data.append('medication', formData.medication);
+  //   for (var pair of data.entries()) {
+  //     console.log(pair[0]+ ', ' + pair[1]);
+  //   }
+    
+  // }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const data = new FormData();
+    let difArr = []
     let conArr = []
     let medArr = []
-    formData.options.forEach((option) => {
-      data.append('option', option);
+    formData.difficulty.forEach((option) => {
+      data.append('difficulty', option);
+      
+      difArr.push(option)
+    });
+    formData.condition.forEach((option) => {
+      data.append('condition', option);
+      
       conArr.push(option)
     });
-    data.append('medication', formData.medication);
-    console.log(conArr)
+    
+    setCon(conArr)
+    setDiff(difArr)
+    medArr = (formData.medication).split(",")
+    data.append('medication', medArr);
+    setMed(medArr)
+    for (var pair of data.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]);
+    }
+    console.log(conditions)
     
   }
+
+  useEffect(()=>{
+    async function getSol(){
+      // const sol = await 
+    }
+    getSol()
+  })
+
+
     return (
         <main>
-      <form onSubmit={handleSubmit}>
+          {/* <form onSubmit={handleDifSubmit} className='diff-form'>
+      Are you facing any of the following difficulties? Please select all that apply to you:
+        <div className="difficulty">
+          <input
+            type="checkbox"
+            id="difficulty"
+            name="difficulty"
+            value="difficulty cooking"
+            checked={formData.options.includes("difficulty cooking")}
+            onChange={handleDifCheckboxChange}
+          />
+          difficulty cooking
+          <input
+            type="checkbox"
+            id="difficulty"
+            name="difficulty"
+            value="difficulty focusing to do an assignment or work task"
+            checked={formData.options.includes("difficulty focusing to do an assignment or work task")}
+            onChange={handleDifCheckboxChange}
+          />
+          difficulty focusing to do an assignment or work task
+          <input
+            type="checkbox"
+            id="difficulty"
+            name="difficulty"
+            value="hyperventilation/shortness of breath"
+            checked={formData.options.includes("hyperventilation/shortness of breath")}
+            onChange={handleDifCheckboxChange}
+          />
+          hyperventilation/shortness of breath
+          <input
+            type="checkbox"
+            id="difficulty"
+            name="difficulty"
+            value="difficulty doing dishes"
+            checked={formData.options.includes("difficulty doing dishes")}
+            onChange={handleDifCheckboxChange}
+          />
+          difficulty doing dishes
+        </div>
+        </form> */}
+
+
+      <form onSubmit={handleSubmit} className='con-form'>
+      Are you facing any of the following difficulties? Please select all that apply to you:
+        <div className="difficulty">
+          <input
+            type="checkbox"
+            id="difficulty"
+            name="difficulty"
+            value="difficulty cooking"
+            checked={formData.difficulty.includes("difficulty cooking")}
+            onChange={handleDifCheckboxChange}
+          />
+          difficulty cooking
+          <input
+            type="checkbox"
+            id="difficulty"
+            name="difficulty"
+            value="difficulty focusing to do an assignment or work task"
+            checked={formData.difficulty.includes("difficulty focusing to do an assignment or work task")}
+            onChange={handleDifCheckboxChange}
+          />
+          difficulty focusing to do an assignment or work task
+          <input
+            type="checkbox"
+            id="difficulty"
+            name="difficulty"
+            value="hyperventilation/shortness of breath"
+            checked={formData.difficulty.includes("hyperventilation/shortness of breath")}
+            onChange={handleDifCheckboxChange}
+          />
+          hyperventilation/shortness of breath
+          <input
+            type="checkbox"
+            id="difficulty"
+            name="difficulty"
+            value="difficulty doing dishes"
+            checked={formData.difficulty.includes("difficulty doing dishes")}
+            onChange={handleDifCheckboxChange}
+          />
+          difficulty doing dishes
+        </div>
+
+
+
         Are you diagnosed with any of the following conditions:
-        <div className="topping">
+        <div className="condition">
           <input
             type="checkbox"
             id="condition"
             name="condition"
             value="ADHD"
-            checked={formData.options.includes("ADHD")}
+            checked={formData.condition.includes("ADHD")}
             onChange={handleCheckboxChange}
           />
           ADHD
@@ -63,7 +214,7 @@ const MyForm = () => {
             id="condition"
             name="condition"
             value="ASD"
-            checked={formData.options.includes("ASD")}
+            checked={formData.condition.includes("ASD")}
             onChange={handleCheckboxChange}
           />
           ASD
@@ -72,7 +223,7 @@ const MyForm = () => {
             id="condition"
             name="condition"
             value="PTSD"
-            checked={formData.options.includes("PTSD")}
+            checked={formData.condition.includes("PTSD")}
             onChange={handleCheckboxChange}
           />
           PTSD
@@ -81,7 +232,7 @@ const MyForm = () => {
             id="condition"
             name="condition"
             value="OCD"
-            checked={formData.options.includes("OCD")}
+            checked={formData.condition.includes("OCD")}
             onChange={handleCheckboxChange}
           />
           OCD
