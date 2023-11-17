@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-
+import axios from 'axios';
 const MyForm = () => {
   const [difficulties,setDiff] = useState([])
+  const [diffId,setDiffId] = useState([])
   const [conditions,setCon] = useState([])
+  const [conId,setConId] = useState([])
   const [medications,setMed] = useState([])
   const [formData, setFormData] = useState({
     difficulty: [],
@@ -29,6 +31,7 @@ const MyForm = () => {
   };
 
   const handleDifCheckboxChange = (e) => {
+    // console.log(e.target.id)
     const { value } = e.target;
     setFormData((prevFormData) => {
       if (prevFormData.difficulty.includes(value)) {
@@ -43,6 +46,7 @@ const MyForm = () => {
         };
       }
     });
+   
     
   };
   const handleMedicationChange = (e) => {
@@ -52,6 +56,14 @@ const MyForm = () => {
       medication: value,
     }));
   };
+
+  async function search(diff){
+    let encodedDiff = encodeURIComponent(diff);
+    console.log(encodedDiff)
+      const con = await axios.get(`http://localhost:8080/conditions/${encodedDiff}`)
+    console.log({con})
+    
+  }
   // const handleDifSubmit = (e) => {
   //   e.preventDefault();
 
@@ -92,13 +104,18 @@ const MyForm = () => {
     
     setCon(conArr)
     setDiff(difArr)
+    if(formData.medication){
     medArr = (formData.medication).split(",")
     data.append('medication', medArr);
     setMed(medArr)
-    for (var pair of data.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]);
     }
-    console.log(conditions)
+    difArr.forEach((e)=>{
+      search(e)
+    })
+    // for (var pair of data.entries()) {
+    //   console.log(pair[0]+ ', ' + pair[1]);
+    // }
+    // console.log(conditions)
     
   }
 
@@ -160,7 +177,7 @@ const MyForm = () => {
         <div className="difficulty">
           <input
             type="checkbox"
-            id="difficulty"
+            id="1"
             name="difficulty"
             value="difficulty cooking"
             checked={formData.difficulty.includes("difficulty cooking")}
@@ -169,7 +186,7 @@ const MyForm = () => {
           difficulty cooking
           <input
             type="checkbox"
-            id="difficulty"
+            id="2"
             name="difficulty"
             value="difficulty focusing to do an assignment or work task"
             checked={formData.difficulty.includes("difficulty focusing to do an assignment or work task")}
