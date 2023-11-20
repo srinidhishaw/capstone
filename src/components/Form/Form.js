@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 import "./Form.scss"
 const MyForm = () => {
   let descArr = []
@@ -7,6 +8,9 @@ const MyForm = () => {
   let i=0
   const [difficulties,setDiff] = useState([])
   const [diffList,setDiffList] = useState([])
+  const [solList,setSolList] = useState([])
+
+  const [isSolList,setIsSolList] = useState(false)
   const [diffId,setDiffId] = useState([])
   const [conditions,setCon] = useState([])
   const [conId,setConId] = useState([])
@@ -71,8 +75,12 @@ const MyForm = () => {
       const con = await axios.get(`http://localhost:8080/conditions/${encodedDiff}`)
       solArr.push(con.data[0])
     console.log(solArr)
+    setSolList(solArr)
+    setIsSolList(true)
+    // return <Navigate to="/solutions" state={{ solList }} />;
     
   }
+  
   // const handleDifSubmit = (e) => {
   //   e.preventDefault();
 
@@ -145,7 +153,25 @@ const MyForm = () => {
     
   }
 console.log(diffList)
+if(isSolList===true){
+  return(
+    <div className="solution">
 
+    {solList.map((sol) => {      
+      return(
+        
+        <div key={sol.id}>
+          <p>{sol.description}</p>
+         <p>{sol.condition}</p>
+        <p>{sol.explanation}</p>
+        <p>{sol.solution}</p>
+        <p>{sol.symptom}</p>
+        </div>
+     ) })}
+     </div>
+        
+  )
+}
     return (
         <main>
           {/* <form onSubmit={handleDifSubmit} className='diff-form'>

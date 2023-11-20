@@ -4,6 +4,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import HomePage from './pages/HomePage/HomePage';
+import Solutions from './pages/Solutions/Solutions';
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,11 @@ function App() {
             />
           }>
              </Route>
+
+    <Route path="/solutions" element={
+      <Solutions
+      />
+    }></Route>
     </Routes>
     </BrowserRouter>
   );
