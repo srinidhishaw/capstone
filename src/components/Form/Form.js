@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import "./Form.scss"
 const MyForm = () => {
+  let descArr = []
+  let solArr=[]
+  let i=0
   const [difficulties,setDiff] = useState([])
+  const [diffList,setDiffList] = useState([])
   const [diffId,setDiffId] = useState([])
   const [conditions,setCon] = useState([])
   const [conId,setConId] = useState([])
   const [medications,setMed] = useState([])
+  const [isLoading,setLoading]=useState(true)
   const [formData, setFormData] = useState({
     difficulty: [],
     condition:[],
     medication:[]
   });
 
+  
   const handleCheckboxChange = (e) => {
     const { value } = e.target;
     setFormData((prevFormData) => {
@@ -58,10 +65,12 @@ const MyForm = () => {
   };
 
   async function search(diff){
+    
     let encodedDiff = encodeURIComponent(diff);
     console.log(encodedDiff)
       const con = await axios.get(`http://localhost:8080/conditions/${encodedDiff}`)
-    console.log({con})
+      solArr.push(con.data[0])
+    console.log(solArr)
     
   }
   // const handleDifSubmit = (e) => {
@@ -120,12 +129,22 @@ const MyForm = () => {
   }
 
   useEffect(()=>{
-    async function getSol(){
-      // const sol = await 
+    async function getDifficulties(){
+      
+      const {data} = await axios.get(`http://localhost:8080/conditions/difficulties`)
+      descArr = data
+      setDiffList(data)
+      setLoading(false)
+      console.log(descArr)
     }
-    getSol()
-  })
-
+    getDifficulties()
+  },[])
+  if(isLoading===true){
+    
+      return <div className="App">Loading...</div>;
+    
+  }
+console.log(diffList)
 
     return (
         <main>
@@ -175,7 +194,27 @@ const MyForm = () => {
       <form onSubmit={handleSubmit} className='con-form'>
       Are you facing any of the following difficulties? Please select all that apply to you:
         <div className="difficulty">
-          <input
+
+        {diffList.map((difficulty) => {      
+          return(
+            <>
+            <p>{difficulty}</p>
+            <input
+              key={i} // Add a unique key based on your difficulty data
+              type="checkbox"
+              id={i++} // Add a unique identifier for each difficulty
+              name="difficulty"
+              value={difficulty}
+              checked={formData.difficulty.includes(difficulty)}
+              onChange={handleDifCheckboxChange}
+              
+            />
+            
+            </>
+         ) }
+         )
+        }
+          {/* <input
             type="checkbox"
             id="1"
             name="difficulty"
@@ -210,7 +249,7 @@ const MyForm = () => {
             checked={formData.difficulty.includes("difficulty doing dishes")}
             onChange={handleDifCheckboxChange}
           />
-          difficulty doing dishes
+          difficulty doing dishes */}
         </div>
 
 
