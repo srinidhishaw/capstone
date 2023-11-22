@@ -22,7 +22,6 @@ List the functionality that your app will include. These can be written as user 
 
 - Api that stores data abou 3-4 mental health conditions, along with the symptoms, difficulties, and solutions involved for each.
 - The user can select their conditions and the difficulties they are dealing with that day on a form, and then the app will return the symptom they are experiencing, and a list of solutions that they can try to improve the situation, and an explanation of what they are experiencing.
-- If the user would like more information, the app will prompt the user to chat with chatGPT using the info provided.
 - they will be able to log their symptoms from that day in a diary.
 
 ## Implementation
@@ -31,7 +30,7 @@ List the functionality that your app will include. These can be written as user 
 
 List technologies that will be used in your app, including any libraries to save time or provide more functionality. Be sure to research any potential limitations.
 
-- ChatGPT API
+
 - MySQL tables
 - Node.js
 
@@ -39,7 +38,7 @@ List technologies that will be used in your app, including any libraries to save
 
 List any external sources of data that will be used in your app.
 
-- ChatGPT API
+- Data pulled from chatGPT for the database
 
 ### Sitemap
 
@@ -47,7 +46,7 @@ List the pages of your app with brief descriptions. You can show this visually, 
 
 - HomePage: this has the form with a listing of the difficulties and conditions for the user to choose from
 - Solutions Page: This is displayed when a response from the API is received and where the user will be redirected to read more info about what they are experiencing and potential solutions
-- ChatGPT page: This is the page that the user can access chatGPT
+
 - Diary page: This is where the user can access previous logs
 
 ### Mockups
@@ -89,15 +88,15 @@ Task 5: Set up routes
 Week 2:
 Task 6: Manage axios request for the data on the client side
 Task 7: Display output to the user
-Task 8: Create the ChatGPT page
 
 Week 3:
-Task 9: Create the diary file, write into it, and create the endpoint
-Task 10: Create the diary on the client side
-Task 11: Styling
+Task 8: Create the diary file, write into it, and create the endpoint
+Task 9: Create the diary on the client side
+Task 10: Styling
 
 ## Nice-to-haves
 
 Your project will be marked based on what you committed to in the above document. Under nice-to-haves, you can list any additional features you may complete if you have extra time, or after finishing.
 
 User Authorisation and deployment.
+ChatGPT chat option
