@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import ChatPage from './pages/Chat/Chat';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import HomePage from './pages/HomePage/HomePage';
@@ -19,6 +20,8 @@ function App() {
       <Solutions
       />
     }></Route>
+
+    
     </Routes>
     </BrowserRouter>
   );

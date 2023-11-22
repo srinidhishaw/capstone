@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# Project Title
+Service Dog
+## Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+What is your app? Brief description in a couple of sentences.
 
-## Available Scripts
+My app is meant to help individuals with one or many mental health diagnoses identify what they are struggling with that may be associated with their illnesses, why they are experiencing that, and how they can manage or solve that difficulty. 
+### Problem
 
-In the project directory, you can run:
+Why is your app needed? Background information around any pain points or other reasons.
 
-### `npm start`
+The reason why it is called Service Dog is that it is similar to having a Service Dog, for an illness like PTSD, for example, but on an app and making help more accessible to people who may not have the resources to care for a dog or therapy. Resources are greatly limited for mental health struggles that affect individuals' day to day activities, and often they do not have insight or awareness as to what they are struggling with and how to manage it. This app is there to make the process of regulation a bit easier and take some pressure off the individual.
+### User Profile
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Who will use your app? How will they use it? Any special considerations that your app must take into account.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Individuals with one or more mental health diagnoses (specifically ADHD, ASD, PTSD so far) will use it either on a computer or mobile phone.
 
-### `npm test`
+### Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.
 
-### `npm run build`
+- Api that stores data abou 3-4 mental health conditions, along with the symptoms, difficulties, and solutions involved for each.
+- The user can select their conditions and the difficulties they are dealing with that day on a form, and then the app will return the symptom they are experiencing, and a list of solutions that they can try to improve the situation, and an explanation of what they are experiencing.
+- they will be able to log their symptoms from that day in a diary.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Implementation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Tech Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+List technologies that will be used in your app, including any libraries to save time or provide more functionality. Be sure to research any potential limitations.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- MySQL tables
+- Node.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### APIs
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+List any external sources of data that will be used in your app.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Data pulled from chatGPT for the database
 
-## Learn More
+### Sitemap
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+List the pages of your app with brief descriptions. You can show this visually, or write it out.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- HomePage: this has the form with a listing of the difficulties and conditions for the user to choose from
+- Solutions Page: This is displayed when a response from the API is received and where the user will be redirected to read more info about what they are experiencing and potential solutions
 
-### Code Splitting
+- Diary page: This is where the user can access previous logs
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Mockups
 
-### Analyzing the Bundle Size
+Provide visuals of your app's screens. You can use tools like Figma or pictures of hand-drawn sketches.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Data
 
-### Making a Progressive Web App
+Describe your data and the relationships between them. You can show this visually using diagrams, or write it out. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- The tables will be nested in this order for each condition:
+Conditions--> Symptoms and Relevant Explanation--> Difficulties --> Solutions 
 
-### Advanced Configuration
+### Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+List endpoints that your server will implement, including HTTP methods, parameters, and example responses.
+- /conditions - gives a list of the conditions in the table e.g.:[{id:1,condition:ADHD},{id:2,condition:ASD}...]
+- /conditions/:difficulty - retrives relevant information about the specified difficulty. e.g.: difficulty staying organised, symptom: executive dysfunction, condition:ADHD, solution:use a planner or use the Pomodoro method
+- /diary - access the logs with a timestamp
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Auth
 
-### `npm run build` fails to minify
+Does your project include any login or user profile functionality? If so, describe how authentication/authorization will be implemented.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+It is a possibility, however this will be decided upon time-permitting.
+
+## Roadmap
+
+Scope your project as a sprint. Break down the tasks that will need to be completed and map out timeframes for implementation. Think about what you can reasonably complete before the due date. The more detail you provide, the easier it will be to build.
+
+Week 1:
+Task 1: create the client and server file structures
+Task 2: client side form
+Task 3: set up the database
+Task 4: seed basic starter data
+Task 5: Set up routes
+
+Week 2:
+Task 6: Manage axios request for the data on the client side
+Task 7: Display output to the user
+
+Week 3:
+Task 8: Create the diary file, write into it, and create the endpoint
+Task 9: Create the diary on the client side
+Task 10: Styling
+
+## Nice-to-haves
+
+Your project will be marked based on what you committed to in the above document. Under nice-to-haves, you can list any additional features you may complete if you have extra time, or after finishing.
+
+User Authorisation and deployment.
+ChatGPT chat option
