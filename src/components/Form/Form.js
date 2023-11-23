@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Solution from '../Solution/Solution';
 import { Navigate } from 'react-router-dom';
 import "./Form.scss"
 const MyForm = () => {
@@ -67,39 +68,39 @@ const MyForm = () => {
       medication: value,
     }));
   };
-
   async function search(diff){
     
     let encodedDiff = encodeURIComponent(diff);
     console.log(encodedDiff)
       const con = await axios.get(`http://localhost:8080/conditions/${encodedDiff}`)
-      solArr.push(con.data[0])
-    console.log(solArr)
-    setSolList(solArr)
+      // solArr.push(con.data[0])
+    setSolList((prevSolList) => [...prevSolList, con.data[0]]);
     setIsSolList(true)
-    // return <Navigate to="/solutions" state={{ solList }} />;
-    
   }
-  
-  // const handleDifSubmit = (e) => {
-  //   e.preventDefault();
+  function SolutionList({ solList }) {
+    return (
+      <div className="solution">
+        {solList.map((sol) => (
+          <div key={sol.id}>
+            <p>{sol.description}</p>
+            <p>{sol.condition}</p>
+            <p>{sol.explanation}</p>
+            <p>{sol.solution}</p>
+            <p>{sol.symptom}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  async function fetchDataForDifficulties(difficulties) {
+    const promises = difficulties.map((e) => search(e));
+    await Promise.all(promises);
+  }
 
-  //   const data = new FormData();
-  //   let difArr = []
-  //   let conArr = []
-  //   let medArr = []
-  //   console.log(formData.options)
-  //   formData.options.forEach((option) => {
-  //     data.append('difficulties', option);
-  //     difArr.push(option)
-  //   });
-  //   setDiff(difArr)
-  //   data.append('medication', formData.medication);
-  //   for (var pair of data.entries()) {
-  //     console.log(pair[0]+ ', ' + pair[1]);
-  //   }
-    
-  // }
+  useEffect(() => {
+    fetchDataForDifficulties(difficulties);
+  }, [difficulties]);
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -126,13 +127,7 @@ const MyForm = () => {
     data.append('medication', medArr);
     setMed(medArr)
     }
-    difArr.forEach((e)=>{
-      search(e)
-    })
-    // for (var pair of data.entries()) {
-    //   console.log(pair[0]+ ', ' + pair[1]);
-    // }
-    // console.log(conditions)
+    
     
   }
 
@@ -143,7 +138,6 @@ const MyForm = () => {
       descArr = data
       setDiffList(data)
       setLoading(false)
-      console.log(descArr)
     }
     getDifficulties()
   },[])
@@ -152,71 +146,9 @@ const MyForm = () => {
       return <div className="App">Loading...</div>;
     
   }
-console.log(diffList)
-if(isSolList===true){
-  return(
-    <div className="solution">
 
-    {solList.map((sol) => {      
-      return(
-        
-        <div key={sol.id}>
-          <p>{sol.description}</p>
-         <p>{sol.condition}</p>
-        <p>{sol.explanation}</p>
-        <p>{sol.solution}</p>
-        <p>{sol.symptom}</p>
-        </div>
-     ) })}
-     </div>
-        
-  )
-}
-    return (
+  return isSolList ? <SolutionList solList={solList} /> :(
         <main>
-          {/* <form onSubmit={handleDifSubmit} className='diff-form'>
-      Are you facing any of the following difficulties? Please select all that apply to you:
-        <div className="difficulty">
-          <input
-            type="checkbox"
-            id="difficulty"
-            name="difficulty"
-            value="difficulty cooking"
-            checked={formData.options.includes("difficulty cooking")}
-            onChange={handleDifCheckboxChange}
-          />
-          difficulty cooking
-          <input
-            type="checkbox"
-            id="difficulty"
-            name="difficulty"
-            value="difficulty focusing to do an assignment or work task"
-            checked={formData.options.includes("difficulty focusing to do an assignment or work task")}
-            onChange={handleDifCheckboxChange}
-          />
-          difficulty focusing to do an assignment or work task
-          <input
-            type="checkbox"
-            id="difficulty"
-            name="difficulty"
-            value="hyperventilation/shortness of breath"
-            checked={formData.options.includes("hyperventilation/shortness of breath")}
-            onChange={handleDifCheckboxChange}
-          />
-          hyperventilation/shortness of breath
-          <input
-            type="checkbox"
-            id="difficulty"
-            name="difficulty"
-            value="difficulty doing dishes"
-            checked={formData.options.includes("difficulty doing dishes")}
-            onChange={handleDifCheckboxChange}
-          />
-          difficulty doing dishes
-        </div>
-        </form> */}
-
-
       <form onSubmit={handleSubmit} className='con-form'>
       Are you facing any of the following difficulties? Please select all that apply to you:
         <div className="difficulty">
