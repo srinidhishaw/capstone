@@ -1,8 +1,9 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Diary from './components/Diary/Diary';
 import HomePage from './pages/HomePage/HomePage';
 import Solutions from './pages/Solutions/Solutions';
 function App() {
@@ -17,6 +18,10 @@ function App() {
 
     <Route path="/solutions" element={
       <Solutions
+      />
+    }></Route>
+    <Route path="/conditions/diary" element={
+      <Diary
       />
     }></Route>
 
