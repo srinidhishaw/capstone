@@ -88,6 +88,10 @@ const MyForm = () => {
           <p className='solution-card__content'> {sol.condition}</p>
           </div>
           <div className='solution-card_subdiv'>
+          <p className='solution-card__subtitle'>Symptom: </p>
+          <p className='solution-card__content'> {sol.symptom}</p>
+          </div>
+          <div className='solution-card_subdiv'>
           <p className='solution-card__subtitle'>Explanation: </p>
           <p className='solution-card__content'> {sol.explanation}</p>
           </div>
@@ -95,10 +99,7 @@ const MyForm = () => {
           <p className='solution-card__subtitle'>Solution: </p>
           <p className='solution-card__content'> {sol.solution}</p>
           </div>
-          <div className='solution-card_subdiv'>
-          <p className='solution-card__subtitle'>Symptom: </p>
-          <p className='solution-card__content'> {sol.symptom}</p>
-          </div>
+          
         </div>
       ))}
     </div>
@@ -115,7 +116,7 @@ const MyForm = () => {
   }, [difficulties]);
   
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = new FormData();
@@ -135,11 +136,22 @@ const MyForm = () => {
     
     setCon(conArr)
     setDiff(difArr)
-    if(formData.medication){
-    medArr = (formData.medication).split(",")
-    data.append('medication', medArr);
-    setMed(medArr)
-    }
+    // if(formData.medication){
+    // medArr = (formData.medication).split(",")
+    // data.append('medication', medArr);
+    // setMed(medArr)
+    // }
+
+    // const promises = formData.condition.map(async (selectedCondition) => {
+    //   const response = await axios.get(`http://localhost:8080/conditions/${selectedCondition}`);
+    //   return response.data[0];
+    // });
+
+    // const results = await Promise.all(promises);
+
+    // console.log(results)
+
+
     
     
   }
@@ -164,63 +176,20 @@ const MyForm = () => {
         <main>
       <form onSubmit={handleSubmit} className='con-form'>
       Are you facing any of the following difficulties? Please select all that apply to you:
-        <div className="difficulty">
-
-        {diffList.map((difficulty) => {      
-          return(
-            <>
-            <p>{difficulty}</p>
-            <input
-              key={i} // Add a unique key based on your difficulty data
-              type="checkbox"
-              id={i++} // Add a unique identifier for each difficulty
-              name="difficulty"
-              value={difficulty}
-              checked={formData.difficulty.includes(difficulty)}
-              onChange={handleDifCheckboxChange}
-              
-            />
-            
-            </>
-         ) }
-         )
-        }
-          {/* <input
-            type="checkbox"
-            id="1"
-            name="difficulty"
-            value="difficulty cooking"
-            checked={formData.difficulty.includes("difficulty cooking")}
-            onChange={handleDifCheckboxChange}
-          />
-          difficulty cooking
-          <input
-            type="checkbox"
-            id="2"
-            name="difficulty"
-            value="difficulty focusing to do an assignment or work task"
-            checked={formData.difficulty.includes("difficulty focusing to do an assignment or work task")}
-            onChange={handleDifCheckboxChange}
-          />
-          difficulty focusing to do an assignment or work task
-          <input
-            type="checkbox"
-            id="difficulty"
-            name="difficulty"
-            value="hyperventilation/shortness of breath"
-            checked={formData.difficulty.includes("hyperventilation/shortness of breath")}
-            onChange={handleDifCheckboxChange}
-          />
-          hyperventilation/shortness of breath
-          <input
-            type="checkbox"
-            id="difficulty"
-            name="difficulty"
-            value="difficulty doing dishes"
-            checked={formData.difficulty.includes("difficulty doing dishes")}
-            onChange={handleDifCheckboxChange}
-          />
-          difficulty doing dishes */}
+      <div className="difficulty">
+          {diffList.map((difficulty) => (
+            <div key={i++} className="difficulty-checkbox">
+              <input
+                type="checkbox"
+                id={i}
+                name="difficulty"
+                value={difficulty}
+                checked={formData.difficulty.includes(difficulty)}
+                onChange={handleDifCheckboxChange}
+              />
+              <label htmlFor={i++}>{difficulty}</label>
+            </div>
+          ))}
         </div>
 
 
@@ -269,8 +238,8 @@ const MyForm = () => {
           Above checkbox is {isChecked ? "checked" : "un-checked"}.
         </div> */}
       
-        Do you take any medications for any of the listed conditions (separated by commas):
-        <div className="medication">
+        {/* Do you take any medications for any of the listed conditions (separated by commas): */}
+        {/* <div className="medication">
           <input
             type="text"
             id="medication"
@@ -280,7 +249,7 @@ const MyForm = () => {
             // onChange={handleOnChange}
           />
           
-        </div>
+        </div> */}
         <input className ="submit-button" type="submit" value="Submit"/>
       </form>
 </main>

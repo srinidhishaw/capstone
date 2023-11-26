@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import Header from '../Header/Header';
 function Diary(){
     const [isLoading,setLoading]=useState(true)
     const [diary,setDiary]=useState(true)
@@ -19,6 +19,7 @@ function Diary(){
     }  
     return(
 <main>
+    <Header/>
 <div className="solution-container">
       {diary.map((sol) => (
         <div key={sol.id} className="solution-card">
