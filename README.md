@@ -20,7 +20,7 @@ Individuals with one or more mental health diagnoses (specifically ADHD, ASD, PT
 
 List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.
 
-- Api that stores data abou 3-4 mental health conditions, along with the symptoms, difficulties, and solutions involved for each.
+- Api that stores data abou 2-4 mental health conditions, along with the symptoms, difficulties, and solutions involved for each.
 - The user can select their conditions and the difficulties they are dealing with that day on a form, and then the app will return the symptom they are experiencing, and a list of solutions that they can try to improve the situation, and an explanation of what they are experiencing.
 - they will be able to log their symptoms from that day in a diary.
 

@@ -1,7 +1,14 @@
 import "./Header.scss"
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import Logo from "../../assets/Images/Service_Dog.jpg"
 function Header (){
+    function handleClick() {
+        
+        window.location.reload();
+        <Navigate to="/"/>
+      };
+    
     return(
         <main>
             <div className="header-container">

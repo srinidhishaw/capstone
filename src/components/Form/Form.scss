@@ -3,12 +3,12 @@
 @use '../../styles/partials/fonts' as *;
 .custom-select-wrapper {
     position: relative;
-    width: 200px; /* Set the width according to your design */
+    width: 200px;
   }
   
   .custom-select {
     appearance: none;
-    background-color: #ffffff;
+    background-color: azure;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 10px;
@@ -24,6 +24,10 @@
   .custom-select option {
     font-size: 16px;
   }
+  .difficulty {
+    color:#6495ED;
+    font-weight:700
+  }
 
   .main {
     display: flex;
@@ -38,7 +42,7 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f5f5f5;
+    background-color: azure;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
@@ -52,9 +56,12 @@
         margin-right: 8px;
       }
     }
-  
+  .con-form__title{
+    font-weight: 900;
+    color:#2a52be;
+  }
     .submit-button {
-      background-color: #3498db;
+      background-color:#2a52be;
       color: #fff;
       padding: 10px 20px;
       border: none;
@@ -110,3 +117,11 @@
     flex-direction: row;
     justify-content:flex-start;
   }
+.condition{
+  color:#6495ED;
+  font-weight: 700;
+}
+.condition-title{
+  color:#2a52be;
+  font-weight:900;
+}

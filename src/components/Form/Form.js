@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import SolutionList from '../Solution/Solution';
 import Solution from '../Solution/Solution';
 import { Navigate } from 'react-router-dom';
+import Hero from '../Hero/Hero';
 import "./Form.scss"
 const MyForm = () => {
   let descArr = []
@@ -72,40 +74,12 @@ const MyForm = () => {
     
     let encodedDiff = encodeURIComponent(diff);
     console.log(encodedDiff)
-      const con = await axios.get(`http://localhost:8080/conditions/${encodedDiff}`)
+      const con = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/conditions/${encodedDiff}`)
       // solArr.push(con.data[0])
     setSolList((prevSolList) => [...prevSolList, con.data[0]]);
     setIsSolList(true)
   }
-  function SolutionList({ solList }) {
-    return (
-      <div className="solution-container">
-      {solList.map((sol) => (
-        <div key={sol.id} className="solution-card">
-          <h3>{sol.description}</h3>
-          <div className='solution-card_subdiv'>
-          <p className='solution-card__subtitle'>Condition: </p>
-          <p className='solution-card__content'> {sol.condition}</p>
-          </div>
-          <div className='solution-card_subdiv'>
-          <p className='solution-card__subtitle'>Symptom: </p>
-          <p className='solution-card__content'> {sol.symptom}</p>
-          </div>
-          <div className='solution-card_subdiv'>
-          <p className='solution-card__subtitle'>Explanation: </p>
-          <p className='solution-card__content'> {sol.explanation}</p>
-          </div>
-          <div className='solution-card_subdiv'>
-          <p className='solution-card__subtitle'>Solution: </p>
-          <p className='solution-card__content'> {sol.solution}</p>
-          </div>
-          
-        </div>
-      ))}
-    </div>
-
-    );
-  }
+  
   async function fetchDataForDifficulties(difficulties) {
     const promises = difficulties.map((e) => search(e));
     await Promise.all(promises);
@@ -159,7 +133,7 @@ const MyForm = () => {
   useEffect(()=>{
     async function getDifficulties(){
       
-      const {data} = await axios.get(`http://localhost:8080/conditions/difficulties`)
+      const {data} = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/conditions/difficulties`)
       descArr = data
       setDiffList(data)
       setLoading(false)
@@ -173,9 +147,17 @@ const MyForm = () => {
   }
 
   return isSolList ? <SolutionList solList={solList} /> :(
+    // return isSolList ? (
+    //   <SolutionList solList={solList} />
+    // ) : (
+    //   <Navigate to="/solutions"/>
+    // )
+    // return !isSolList ?(
+
+
         <main>
       <form onSubmit={handleSubmit} className='con-form'>
-      Are you facing any of the following difficulties? Please select all that apply to you:
+      <h1 className='con-form__title'>Are you facing any of the following difficulties? Please select all that apply to you:</h1>
       <div className="difficulty">
           {diffList.map((difficulty) => (
             <div key={i++} className="difficulty-checkbox">
@@ -194,7 +176,7 @@ const MyForm = () => {
 
 
 
-        Are you diagnosed with any of the following conditions:
+        <p className='condition-title'>Are you diagnosed with any of the following conditions:</p>
         <div className="condition">
           <input
             type="checkbox"
