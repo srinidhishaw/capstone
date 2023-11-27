@@ -1,0 +1,40 @@
+.header-container{
+    display: flex;
+    justify-content: center;
+
+    &__title{
+        
+    }
+}
+
+.header-container {
+    background-color:azure; /* Set your desired background color */
+    color: white; /* Set your desired text color */
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-container__title {
+    font-weight: 900;
+    color:#6495ED;
+    font-size:36px;
+    margin: 0;
+    text-decoration: none;
+  }
+  
+  .header-container__link {
+    text-decoration: none;
+    color: white;
+    margin: 0;
+    cursor: pointer;
+    font-weight: 700;
+    color:#6495ED;
+    font-size:24px;
+    margin: 0;
+  }
+  
+  .header-container__link:hover {
+    text-decoration: underline;
+  }

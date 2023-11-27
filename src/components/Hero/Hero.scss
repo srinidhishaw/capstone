@@ -1,0 +1,36 @@
+$circle-size: 100px;
+
+.circle {
+    margin:16px;
+  width: $circle-size;
+  height: $circle-size;
+  background-color: #6495ED;
+  border-radius: 50%;
+  animation: expandShrink 9s infinite; // Adjusted the animation duration to 9s
+
+  @keyframes expandShrink {
+    0%, 100% {
+      transform: scale(1);
+    }
+
+    25% {
+      transform: scale(1.5);
+    }
+
+    50% {
+      transform: scale(1.5);
+    }
+
+    75% {
+      transform: scale(1);
+    }
+  }
+}
+
+.circle-container{
+    margin:16px;
+    padding: 16px;
+    // background-color: azure;
+    display: flex;
+    justify-content: center;
+}
