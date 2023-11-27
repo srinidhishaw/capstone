@@ -100,3 +100,16 @@ Your project will be marked based on what you committed to in the above document
 
 User Authorisation and deployment.
 ChatGPT chat option
+
+***please use nodemon index.js to run the server side instead of node**
+Instructions: 
+- run npm i
+- refer .env.sample
+- npx knex migrate:latest
+-npx knex seed:run
+
+on client side:
+- npm i
+- npm start
+
+*ensure your server is running
